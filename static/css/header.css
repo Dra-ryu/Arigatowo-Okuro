@@ -1,0 +1,39 @@
+nav {
+    height: 10%;
+}
+
+.nav-item {
+    line-height: 30%;
+    margin-bottom: 10px;
+}
+
+#header_icon {
+    height: 50px;
+    text-align: left;
+}
+
+footer {
+    position: fixed; /* フッターを固定する */
+    bottom: 0; /* 上部から配置の基準位置を決める */
+    left: 0; /* 左から配置の基準位置を決める */
+    width: 100%; /* フッターの横幅を指定する */
+    height: 50px; /* フッターの高さを指定する */
+    background-color: #FFAAED; /* フッターの背景色を指定する */
+    padding-right: 10vw;
+    padding-top: 1vw;  /*vwは画面の幅の1%ということ*/
+}
+
+body {
+    width: 100%; /* コンテンツの横幅を指定する */
+    overflow: auto; /* コンテンツの表示を自動に設定（スクロール） */
+}
+
+#footer_icon {
+    height: 40px;
+    position: absolute;
+    /*margin: auto;*/
+}
+
+main {
+    padding-bottom: 15vh;
+}

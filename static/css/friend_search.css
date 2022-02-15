@@ -1,0 +1,60 @@
+body {
+    background-color: #FFF0C5;
+}
+
+.pull select {
+    cursor: pointer;
+    user-select: none;
+    background-color: #FFAAED;
+    width: 250px;
+    height: 30px;
+    line-height: 49px;
+    font-weight: bold;
+    border: none;
+    border-radius: 450px; /* ボタンの角を丸くする */
+    margin-bottom: 30px;
+    color: white;
+    padding-left: 10px;
+}
+
+
+h1 {
+    background: #C4F1FF;
+    height: 100px;
+    line-height: 100px;
+    font-size: 50px;
+    margin-bottom: 100px;
+    padding-left: 15px;
+}
+
+.container {
+    text-align: center;
+}
+
+form {
+    padding: 20px;
+    margin: 2em 0;
+    color: #00000;
+    background: #FDEBF9;
+    border-bottom: solid 6px #FFDDF8;
+    border-radius: 9px;
+}
+
+.friend_add {
+    padding: 20px;
+    margin: 2em 0;
+    color: #00000;
+    background: #FDEBF9;
+    border-bottom: solid 6px #FFDDF8;
+    border-radius: 9px;
+}
+
+.btn {
+  background-color: #00CB00;
+  width: 150px;
+  height: 60px;
+  line-height: 49px;
+  font-weight: bold;
+  border-radius: 450px; /* ボタンの角を丸くする */
+  color: white;
+}

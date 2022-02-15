@@ -1,0 +1,90 @@
+body {
+  background-color: #FFF0C5
+}
+
+.container{
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.list p {
+    font-size: 5vw;
+}
+
+.list select {
+    cursor: pointer;
+    user-select: none;
+    background-color: #FFAAED;
+    width: 250px;
+    height: 30px;
+    line-height: 49px;
+    font-weight: bold;
+    border: none;
+    border-radius: 450px; /* ボタンの角を丸くする */
+    margin-bottom: 20px;
+    color: white;
+    padding-left: 10px;
+}
+
+
+h2 {
+    font-size: 5vw;
+}
+
+.information {
+    background-color: #C4F1FF;
+    /*height: auto;*/
+    margin-bottom: 20px;
+    border-radius: 1vh;
+    padding-top: 1vh;
+    padding-bottom: 0.1vh;
+}
+
+h2 {
+    margin-top: 1vh;
+}
+
+.information p {
+    font-size: 3vw;
+}
+
+.switch{
+    position: relative;
+    margin-left: 0px;
+    z-index: 1;
+    text-align: center;
+}
+
+canvas{
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    bottom: 0;
+    top:  0;                    /* 上からの位置指定 */
+    bottom:  0;                 /* 下からの位置指定 */
+    left:  105px;                   /* 左からの位置指定 */
+    right:  0;                  /* 右からの位置指定 */
+}
+
+.btn{
+    cursor: pointer;
+    user-select: none;
+    background-color: #00CB00;
+    width: 150px;
+    height: 60px;
+    line-height: 50px;
+    font-weight: bold;
+    border-radius: 450px; /* ボタンの角を丸くする */
+    color: white;
+    font-size: 14px;
+    margin-top: 3vh;
+}
+
+.sent{
+    text-align: center;
+    font-size: 28px;
+}
+
+.present{
+    text-align: center;
+}

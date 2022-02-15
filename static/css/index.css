@@ -1,0 +1,74 @@
+body {
+  font-size: 14px;
+  background-color: #FFF0C5;
+}
+
+
+.login {
+  width: 100%;
+  padding-bottom: 30px;
+  text-align: center;
+  padding-top: 6vw;  /*vhだと右側に隙間開いちゃうの謎*/
+}
+
+h2 {
+  font-size: 6vw;
+}
+
+h3 {
+  font-size: 3vw;
+}
+
+.about {
+  background-color: #FEE8F7;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+.information {
+  margin: 25px 100px;
+  text-align: center;
+}
+
+.each_information {
+  margin-bottom: 25px;
+  border-bottom: dotted;/*下線を点線にする*/
+  border-color: #000000;
+  border-width: 1px;
+  padding-bottom: 25px;
+  font-size: 25px;
+}
+
+
+.controls {
+  margin: 25px 100px;
+  text-align: center;
+  display: flex; /* ボタン横並び */
+  justify-content: space-between;
+}
+
+.btn {
+  width: 150px;
+  height: 60px;
+  line-height: 49px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 450px; /* ボタンの角を丸くする */
+}
+
+#start {
+  background: #00CB00;
+}
+
+#finish {
+  background: #FFCC32;
+}
+
+/* 活性・非活性 */
+.inactive {
+  opacity: 0.6;
+}

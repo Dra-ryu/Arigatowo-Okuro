@@ -1,0 +1,96 @@
+body {
+  background-color: #FFF0C5;
+}
+
+
+.container {
+  text-align: center;
+  margin-top: 1vh;
+}
+
+h2 {
+  font-size: 5vw;
+}
+
+.display_point {
+  background-color: #C4F1FF;
+  height: auto;
+  font-size: 50px;
+  margin-bottom: 20px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  border-radius: 1vh;
+}
+
+.display_point h3 {
+  font-size: 10vw;
+}
+
+.housework_select {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.row1 {
+  margin-right: 2.3em;
+}
+
+.row2 {
+  margin-right: 2.3em;
+}
+
+.housework_select ul {
+    display: flex;
+    margin: 0 1%;   /*ボタン同士の間隔を開ける用*/
+    list-style: none;
+}
+
+.row1 img {
+    width: 100%;  /* 親要素の80%のサイズにしてくれる*/
+    border-radius: 1vh;
+}
+
+.row2 img {
+    width: 100%;  /* 親要素の80%のサイズにしてくれる*/
+    border-radius: 1vh;
+}
+
+.row3 img {
+  width: 80%;
+  border-radius: 1vh;
+}
+
+.btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+.partner_select select {
+  cursor: pointer;
+  user-select: none;
+  background-color: #FFAAED;
+  width: 250px;
+  height: 30px;
+  line-height: 49px;
+  font-weight: bold;
+  border: none;
+  border-radius: 450px; /* ボタンの角を丸くする */
+  margin-bottom: 30px;
+  color: white;
+  padding-left: 10px;
+}
+
+#decision {
+  background-color: #00CB00;
+  width: 150px;
+  height: 60px;
+  line-height: 49px;
+  font-weight: bold;
+  border-radius: 450px; /* ボタンの角を丸くする */
+  color: white;
+}
+
+/* 非活性の時に色を薄くする */
+.inactive {
+  opacity: 0.6;
+}
