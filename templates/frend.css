@@ -1,0 +1,31 @@
+body {
+  font-size: 14px;
+  background-color: #88F
+}
+
+.article{
+  background-color: rgba(255, 255, 128, .5);
+}
+
+.list{
+  background-color: rgba(255, 255, 128, .5);
+}
+
+.container {
+  margin: 25px auto;
+  width: 200px;
+  background: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  background: #e77;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+

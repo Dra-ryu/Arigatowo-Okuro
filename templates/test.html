@@ -1,0 +1,42 @@
+{% extends "header.html" %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Friend</title>
+    </head>
+
+    <h1>フレンドリスト</h1>
+
+    {{added_name}}
+
+
+    <a href = "https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/search" role = "button">友達追加はこちらから</a>
+    <a href = "https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/add" role = "button">友達追加はこちらから</a>
+
+    <h1>友達申請・承認</h1>
+    <article>
+        <h2>LINEidを入力</h2>
+            <form action="/search" method="POST">
+                <p>LINDid：<input type="text" name="search" size="30"></p>
+                <input type="submit" value = "検索">
+            </form>
+
+
+                <select name="friend" id="friend_add">
+                    <option hidden>選択してください</option>
+                    {% for searched_friend in searched_friend_name %}
+                        <option> {{ searched_friend }} </option>
+                    {% endfor %}
+                </select>
+            <div id="add" class="btn">決定</div>
+
+
+
+    </article>
+       <!-- <a href = "/create" role = "button">検索</a>-->
+    </article>
+
+</html>
+{% endblock %}

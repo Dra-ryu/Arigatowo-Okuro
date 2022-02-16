@@ -1,0 +1,34 @@
+{%- extends "header.html" %}
+{%- block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+    <div class="login">
+        <h2>新規登録・ログイン</h2>
+        <p></p>
+        <a href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id={{ channel_id }}&redirect_uri={{ redirect_url }}&state={{ random_state }}&scope=openid%20profile">
+        <img src="{{ url_for('static', filename='Line_Login_Button_Image/images/DeskTop/2x/32dp/btn_login_base.png') }}"></a>
+    </div>
+    
+    <hr>
+    <div class="about">
+        <h2><b>ありがとうを贈ろうとは？</b></h2>
+        <hr>
+        <h3>ポイントによって家事を見える化するアプリです</h3>
+    </div>
+
+    <div class="about">
+        <h2><b>ありがとうポイントの使い方</b></h2>
+        <hr>
+        <h3>①家事の時間を計測します</h3>
+        <h3>②パートナーがありがとうを贈ります</h3>
+    </div>
+
+</body>
+</html>
+{%- endblock %}

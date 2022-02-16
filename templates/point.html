@@ -1,0 +1,47 @@
+{%- extends "header.html" %}
+{%- block main %}
+<!DOCTYPE html>
+
+<html="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/point.css">
+    <title>point</title>
+
+    <script src="/static/js/jquery.js"></script>
+
+  </head>
+
+  <body>
+     <div class="container">
+         <div class="list">
+             <p>感謝を伝える人を選んでください</p>
+             <select name="friend" id="friend_name">
+                 <option hidden>感謝する人を選択</option>
+                 {% for friend in friends_name %}
+                     <option>{{ friend.name }}</option>
+                 {% endfor %}
+             </select>
+         </div>
+
+         <hr>
+
+         <div class="information">
+             <h2>感謝の思いをこめて<br>
+               　下のボタンを押しましょう！
+             </h2>
+             <p>※最大20ポイントまでありがとうポイントを加算できます</p>
+         </div>
+
+       <!--ありがとうボタン部分-->
+       <div class="switch">
+         <img src="../static/img/押しボタン.png" width="150" height="131">
+         <canvas id="view_area" width="183" height="131"></canvas>
+       </div>
+    </div>
+    <div id ="send" class="btn">ありがとうを贈る</div>
+    <script src="../static/js/switch.js"></script>
+    </body>
+</html>
+{%- endblock %}

@@ -1,0 +1,175 @@
+{% extends "header.html" %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+
+
+
+
+        <style type="text/css">
+        body {
+              font-size: 100%;
+              background-color: #FFF0C5;
+            }
+
+        .container{
+                background-color: #FFF0C5;
+                height: 100%
+        }
+
+        .body {
+              text-align:center;
+              height: 100%
+                }
+
+        h1{
+            background-color: #C4F1FF;
+            line-height: 100%;
+            font-size: 250%;
+            font-weight: Bold;
+            margin: 1em 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .list{
+                padding: 20px;
+            margin: 2em 0;
+            color: #00000;
+            background: #FDEBF9;
+            border-bottom: solid 6px #FFDDF8;
+            border-radius: 9px;
+            }
+
+            .list p{
+                margin: 0;
+                padding: 0;
+                font-size: 25px;
+                font-weight: Bold;
+            }
+
+
+
+            .btn {
+              position: relative;
+              top: 15px;
+              display: inline-block;
+              padding: 3px 10px;
+              text-decoration: none;
+              color: #FFF;
+              background: #B91843;/*背景色*/
+              border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
+              border-radius: 3px;/*角の丸み*/
+              box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+              font-weight: bold;
+            }
+
+            .search{
+                position: relative;
+              display: inline-block;
+              padding: 3px 10px;
+              text-decoration: none;
+              color: #000;
+              background: #FFAAED;/*背景色*/
+              border-bottom: solid 2px #C981BA;/*少し濃い目の色に*/
+              border-radius: 3px;/*角の丸み*/
+              box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+              font-weight: bold;
+            }
+
+            .inputname{
+                position: relative;
+              display: inline-block;
+              padding: 0px 0px;
+              text-decoration: none;
+              border-radius: 3px;/*角の丸み*/
+            }
+
+           .selectbox {
+                    width:90%;
+                    margin:1em auto;
+                  position:relative;
+                }
+
+            select{
+              -webkit-appearance:none;
+                appearance:none;
+              width:100%;
+              padding:1em 1em;
+              box-sizing:border-box;
+              font-size:1em;
+              border:#ccc 1px solid;
+              border-radius:0;
+              background:#fff;
+               text-align: center;
+            }
+
+            /*.selectbox::after{
+              content:"";
+              display:block;
+              width:10px;
+              height:10px;
+              position:absolute;
+              right:5%;
+              top:35%;
+              border-bottom:#333 2px solid;
+              border-right:#333 2px solid;
+              transform:rotate(45deg)translateY(-30%);
+            }*/
+
+            .color.selectbox select{
+              background:White;
+              color:Black;
+              border-radius:2em;
+            }
+            .color.selectbox::after{
+              border-bottom:#fff 5px solid;
+              border-right:#fff 5px solid;
+            }
+
+         </style>
+
+
+
+
+<div class="body">
+
+        <title>Friend</title>
+        <script src="/static/js/jquery.js"></script>
+
+    </head>
+
+
+        <h1>友達申請・承認</h1>
+    <div class="list">
+        <h3>LINEidを入力</h3>
+        <br>
+        <br>
+
+            <form action="" method="POST">
+                <p>LINEの名前：<input type="text" name="search" size=10% placeholder="入力してね" class="inputname"></p>
+                <br>
+                <input type="submit" value = "検索" class="search">
+            </form>
+            </div>
+
+<div class="selectbox color">
+                <select name="friend" id="friend_add">
+                    {% for searched_friend in searched_friend_name %}
+                        <option> {{ searched_friend.name }} </option>
+                    {% endfor %}
+                </select>
+                </div>
+
+                <div id="add" class="btn">追加</div>
+
+
+
+    <script src="../static/js/friend_search.js"></script>
+
+</div>
+</html>
+{% endblock %}

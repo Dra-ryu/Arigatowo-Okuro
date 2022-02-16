@@ -1,0 +1,69 @@
+{%- extends "header.html" %}
+{%- block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/home.css">
+    <title>Home</title>
+    <script src="/static/js/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="display_point">
+            <h2>{{ username[0]['name'] }}さんの</h2>
+            <h2>ありがとうポイントは</h2>
+            <h3> {{  point[0]['point']  }} pt</h3>
+        </div>
+
+
+        <div class="selection">
+            <div class="housework_select">
+                <h2>家事を選んでください</h2>
+                <div class="row1">
+                    <ul>
+                        <li><div id="cooking" class="btn"><img src="../static/img/cooking.png"></div></li>  <!-- Jacascriptと連携させてボタンにする -->
+                        <li><div id="shopping" class="btn"><img src="../static/img/shopping.png"></div></li>
+                        <li><div id="cleaning" class="btn"><img src="../static/img/cleaning.png"></div></li>
+                    </ul>  <!--imgはインライン要素のため、横並びに設定するためにliをつける -->
+
+                </div>
+
+                <div class="row2">
+                    <ul>
+                        <li><div id="washing" class="btn"><img src="../static/img/washing.png"></div></li>
+                        <li><div id="garbage" class="btn"><img src="../static/img/garbage.png"></div></li>
+                        <li><div id="transfer" class="btn"><img src="../static/img/transfer.png"></div></li>
+                    </ul>
+                </div>
+
+                <div class="row3">
+                    <div id="others" class="btn"><img src="../static/img/others.png"></div>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="partner_select">
+                <h2>相手を選んでください</h2>
+                    <select name="friend" id="friend_name">
+                        <option hidden>選択してください</option>
+                        {% for friend in friends_name %}
+                            <option> {{ friend.name }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <div id="decision" class="btn">決定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../static/js/home.js"></script>
+</body>
+</html>
+{%- endblock %}
