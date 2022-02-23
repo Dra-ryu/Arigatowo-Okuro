@@ -14,33 +14,29 @@
         <div class="display_point">
             <h2>{{ username[0]['name'] }}さんの</h2>
             <h2>ありがとうポイントは</h2>
-            <h3> {{  point[0]['point']  }} pt</h3>
+            <p> {{  point[0]['point']  }} pt</p>
         </div>
 
 
         <div class="selection">
             <div class="housework_select">
                 <h2>家事を選んでください</h2>
-                <div class="row1">
-                    <ul>
-                        <li><div id="cooking" class="btn"><img src="../static/img/cooking.png"></div></li>  <!-- Jacascriptと連携させてボタンにする -->
-                        <li><div id="shopping" class="btn"><img src="../static/img/shopping.png"></div></li>
-                        <li><div id="cleaning" class="btn"><img src="../static/img/cleaning.png"></div></li>
-                    </ul>  <!--imgはインライン要素のため、横並びに設定するためにliをつける -->
+                <ul>
+                    <!--imgはインライン要素のため、横並びに設定するためにliをつける -->
+                    <li><div id="cooking" class="btn"><img src="../static/img/cooking.png"></div></li>  <!-- Jacascriptと連携させてボタンにするためにid属性を付与 -->
+                    <li><div id="shopping" class="btn"><img src="../static/img/shopping.png"></div></li>
+                    <li><div id="cleaning" class="btn"><img src="../static/img/cleaning.png"></div></li>
+                </ul>
 
-                </div>
+                <ul>
+                    <li><div id="washing" class="btn"><img src="../static/img/washing.png"></div></li>
+                    <li><div id="garbage" class="btn"><img src="../static/img/garbage.png"></div></li>
+                    <li><div id="transfer" class="btn"><img src="../static/img/transfer.png"></div></li>
+                </ul>
 
-                <div class="row2">
-                    <ul>
-                        <li><div id="washing" class="btn"><img src="../static/img/washing.png"></div></li>
-                        <li><div id="garbage" class="btn"><img src="../static/img/garbage.png"></div></li>
-                        <li><div id="transfer" class="btn"><img src="../static/img/transfer.png"></div></li>
-                    </ul>
-                </div>
-
-                <div class="row3">
-                    <div id="others" class="btn"><img src="../static/img/others.png"></div>
-                </div>
+                <ul>
+                    <li><div id="others" class="btn"><img src="../static/img/others.png"></div></li>
+                </ul>
 
             </div>
 
@@ -54,15 +50,14 @@
                             <option> {{ friend.name }} </option>
                         {% endfor %}
                     </select>
-                </div>
-                <div>
-                    <div id="decision" class="btn">決定</div>
-                </div>
             </div>
+
+            <div id="decision" class="btn">決定</div>
+
         </div>
     </div>
 
-
+    <!-- jsファイルの読み込み -->
     <script src="../static/js/home.js"></script>
 </body>
 </html>
