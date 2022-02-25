@@ -116,8 +116,8 @@
         {% for friend_information in friends_information %}
         <article>
             <div class="frend">
+            <p style="display:inline"> {{ friend_information.name }} : </p>
             <h2 style="display:inline">{{ friend_information.point }}pt</h2>
-            <p style="display:inline"> : {{ friend_information.name }}</p>
             <div class="frendspace"><p><br></p></div>
             </div>
         </article>

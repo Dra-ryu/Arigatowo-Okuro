@@ -1,33 +1,32 @@
 {%- extends "header.html" %}
 {%- block main %}
-  <!DOCTYPE html>
-  <html lang="ja">
-  <head>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
     <meta charset="utf-8">
     <title>StopWatch</title>
     <link rel="stylesheet" href="static/css/time.css">
     <script src="/static/js/jquery.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <div id="timer">00:00:00</div>
+        <div id="timer">00:00:00</div>
 
-      <div class="information">
-        <div class="each_information">家事の種類：<span id="housework_name"></span></div>
-        <div class="each_information">相手の名前：<span id="partner_username"></span>さん</div>
-      </div>
+        <div class="information">
+            <div class="each_information">家事の種類：<span id="housework_name"></span></div>
+            <div class="each_information">相手の名前：<span id="partner_username"></span>さん</div>
+        </div>
 
-      <div class="controls">
-        <div id="start" class="btn">Start</div>
-        <div id="finish" class="btn">Finish</div>
-      </div>
-
+        <div class="controls">
+            <div id="start" class="btn">Start</div>
+            <div id="finish" class="btn">Finish</div>
+        </div>
     </div>
 
     <script src="static/js/time.js"></script>
-  </body>
-  </html>
+
+</body>
+</html>
 {%- endblock %}
