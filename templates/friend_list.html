@@ -1,133 +1,29 @@
 {% extends "header.html" %}
 {% block main %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="static/css/friend_list.css">
+        <title>Friend</title>
+    </head>
 
-
-        <!--CSSの設定(直接HTMLに記入)↓-->
-    <style type="text/css">
-
-        body {
-              font-size: 100%;
-              background-color: #FFF0C5;
-            }
-
-        .container{
-                background-color: #FFF0C5;
-                height: 100%
-        }
-
-        .body {
-              text-align:center;
-              height: 100%
-                }
-
-        h1{
-            background-color: #C4F1FF;
-            line-height: 100%;
-            font-size: 250%;
-            font-weight: Bold;
-            margin: 1em 0;
-            padding: 15px;
-            border-radius: 10px;
-
-        }
-
-        .frend{
-            line-height: 100%;
-            display:inline;
-            white-space: nowrap;
-        }
-
-        .frendspace{
-             line-height: 100%;
-        }
-
-        .list{
-            padding: 20px;
-        margin: 2em 0;
-        color: #00000;
-        background: #FDEBF9;
-        border-bottom: solid 6px #FFDDF8;
-        border-radius: 9px;
-        }
-
-        .list p{
-            margin: 0;
-            padding: 0;
-            font-size: 25px;
-            font-weight: Bold;
-        }
-
-
-
-        .btn-square-delete {
-              position: relative;
-              top: 15px;
-              display: inline-block;
-              padding: 10px 10px;
-              text-decoration: none;
-              color: #FFF;
-              background: #B91843;/*背景色*/
-              border-bottom: solid 2px #d27d00;/*少し濃い目の色に*/
-              border-radius: 3px;/*角の丸み*/
-              box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-              font-weight: bold;
-            }
-
-        .btn-square-delete:active {
-          border-bottom: solid 2px #B91843;
-          box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-            }
-
-
-
-        .fadd{
-              position: relative;
-              display: inline-block;
-              padding: 10px 10px;
-              text-decoration: none;
-              color: #000;
-              background: #FFAAED;/*背景色*/
-              border-bottom: solid 2px #C981BA;/*少し濃い目の色に*/
-              border-radius: 3px;/*角の丸み*/
-              box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-              font-weight: bold;
-        }
-
-        .fadd{
-            border-bottom: solid 2px #C981BA;
-          box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
-        }
-
-    </style>
-    <!--CSSの設定(直接HTMLに記入)↑-->
-
-<div class="body">
-
-            <title>Friend</title>
-        </head>
-
+    <body>
         <h1>フレンドリスト</h1>
-    <div class="list">
-        {% for friend_information in friends_information %}
-        <article>
-            <div class="frend">
-            <p style="display:inline"> {{ friend_information.name }} : </p>
-            <h2 style="display:inline">{{ friend_information.point }}pt</h2>
-            <div class="frendspace"><p><br></p></div>
-            </div>
-        </article>
-        {% endfor %}
-    </div>
 
-    <a href = "/search" role = "button" class= "fadd">フレンドの追加はこちらから</a>
-    <a href = "/delete" role = "button" class = "btn-square-delete">フレンドの削除はこちらから</a>
+        <div class="friend_list">
+            {% for friend_information in friends_information %}
+                <div class="friend_information">
+                    <p style="display:inline"> {{ friend_information.name }} : </p>
+                    <h2 style="display:inline">{{ friend_information.point }}pt</h2>
+                    <p></p>  <!--フレンドを縦並びにする-->
+                </div>
+            {% endfor %}
+        </div>
 
-
-</div>
+        <a href = "/search" class = "btn" id= "add">フレンドの追加はこちらから</a>
+        <a href = "/delete" class = "btn" id = "delete">フレンドの削除はこちらから</a>
+    </body>
 </html>
 {% endblock %}

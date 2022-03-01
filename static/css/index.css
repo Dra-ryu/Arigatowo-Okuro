@@ -3,20 +3,19 @@ body {
   background-color: #FFF0C5;
 }
 
+h2 {
+  font-size: 4vw;
+}
+
+h3 {
+  font-size: 3vw;
+}
 
 .login {
   width: 100%;
   padding-bottom: 30px;
   text-align: center;
-  padding-top: 6vw;  /*vhだと右側に隙間開いちゃうの謎*/
-}
-
-h2 {
-  font-size: 6vw;
-}
-
-h3 {
-  font-size: 3vw;
+  padding-top: 6vw; /*幅に対する割合*/
 }
 
 .about {
@@ -26,8 +25,6 @@ h3 {
   margin-bottom: 20px;
 }
 
-
-
 .information {
   margin: 25px 100px;
   text-align: center;
@@ -35,7 +32,7 @@ h3 {
 
 .each_information {
   margin-bottom: 25px;
-  border-bottom: dotted;/*下線を点線にする*/
+  border-bottom: dotted; /*下線を点線にする*/
   border-color: #000000;
   border-width: 1px;
   padding-bottom: 25px;
