@@ -1,114 +1,30 @@
 {% extends "header.html" %}
 {% block main %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
     <head>
         <meta charset="UTF-8">
-
-
-        <style type="text/css">
-
-
-        body {
-              font-size: 100%;
-              background-color: #FFF0C5;
-              text-align:center;
-
-            }
-
-       h1{
-            background-color: #C4F1FF;
-            line-height: 100%;
-            font-size: 250%;
-            font-weight: Bold;
-            margin: 1em 0;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .container {
-              background-color: #FFF0C5;
-                height: 100%
-            }
-
-        .btn {
-               position: relative;
-              display: inline-block;
-              padding: 3px 10px;
-              text-decoration: none;
-              color: White;
-              background:red;/*背景色*/
-              border-bottom: solid 2px #C981BA;/*少し濃い目の色に*/
-              border-radius: 3px;/*角の丸み*/
-              box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
-              font-weight: bold;
-            }
-
-
-            select{
-              -webkit-appearance:none;
-                appearance:none;
-              width:60%;
-              padding:1% 10%;
-              box-sizing:border-box;
-              font-size:100%;
-              border:#ccc 1px solid;
-              border-radius:0;
-              background:#fff;
-              text-align: center;
-            }
-
-            /*.selectbox::after{
-              content:"";
-              display:block;
-              width:10px;
-              height:5px;
-              position:absolute;
-              right:5%;
-              top:5%;
-              border-bottom:#333 2px solid;
-              border-right:#333 2px solid;
-              transform:rotate(45deg)translateY(-30%);
-            }*/
-
-            .color.selectbox select{
-              background:White;
-              color:Black;
-              border-radius:2em;
-            }
-            .color.selectbox::after{
-              border-bottom:#fff 5px solid;
-              border-right:#fff 5px solid;
-            }
-
-
-
-         </style>
-
-
-
-
-
         <title>Friend</title>
         <script src="/static/js/jquery.js"></script>
-
+        <link rel="stylesheet" href="static/css/friend_delete.css">
     </head>
 
-    <h1>フレンド削除</h1>
-    <br>
-    <br>
-    <div class="selectbox color">
-        <select name="friend" id="friend_delete">
-            {% for friend_name in friends_name %}
-            <option hidden>選択してください</option>
-                <option> {{ friend_name.name }} </option>
-            {% endfor %}
-        </select>
+    <body>
+        <h1>フレンド削除</h1>
+
+        <div>
+            <select name="friend" id="friend_delete">
+                {% for friend_name in friends_name %}
+                <option hidden>選択してください</option>
+                    <option> {{ friend_name.name }} </option>
+                {% endfor %}
+            </select>
         </div>
-<br>
+
         <div id="del" class="btn">削除</div>
 
+        <script src="../static/js/friend_delete.js"></script>
+    </body>
 
-    <script src="../static/js/friend_delete.js"></script>
 </html>
 {% endblock %}
