@@ -1,17 +1,21 @@
 body {
-  background-color: #FFF0C5
+    font-size: 100%;
+    background-color: #FFF0C5;
+    text-align:center;
+    height: 100%
 }
 
-.container{
-    text-align: center;
-    margin-top: 2vh;
+h1 {
+    background-color: #C4F1FF;
+    line-height: 100%;
+    font-size: 250%;
+    font-weight: Bold;
+    margin: 1em 0;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-.list p {
-    font-size: 5vw;
-}
-
-.list select {
+select {
     cursor: pointer;
     user-select: none;
     background-color: #FFAAED;
@@ -26,44 +30,35 @@ body {
     padding-left: 10px;
 }
 
-
-h2 {
-    font-size: 5vw;
-}
-
 .information {
     background-color: #C4F1FF;
-    /*height: auto;*/
-    margin-bottom: 20px;
-    border-radius: 1vh;
-    padding-top: 1vh;
-    padding-bottom: 0.1vh;
-}
-
-h2 {
-    margin-top: 1vh;
+    margin: 1em 0;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .information p {
-    font-size: 3vw;
+    font-size: 150%;
 }
 
 .switch{
     position: relative;
-    margin-left: 0px;
-    z-index: 1;
     text-align: center;
 }
 
-canvas{
-    position: absolute;
-    z-index: 2;
-    text-align: center;
-    bottom: 0;
-    top:  0;                    /* 上からの位置指定 */
-    bottom:  0;                 /* 下からの位置指定 */
-    left:  105px;                   /* 左からの位置指定 */
-    right:  0;                  /* 右からの位置指定 */
+#view_area {
+    width: 20%;
+    border-radius: 1vh;
+}
+
+#disp_count {
+    background-color: #C4F1FF;
+    color: #000;
+    width: 20%;
+    border-radius: 1vh;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .btn{
@@ -83,8 +78,4 @@ canvas{
 .sent{
     text-align: center;
     font-size: 28px;
-}
-
-.present{
-    text-align: center;
 }

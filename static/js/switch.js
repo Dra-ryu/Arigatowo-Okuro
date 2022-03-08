@@ -1,12 +1,12 @@
 /* グローバル変数 */
 var thank_you = 0;    //ありがとうの数
-var canvas = document.getElementById('view_area');  //htmlのcanvasを取得
-
+var count_disp = document.getElementById("disp_count");
+var img = document.getElementById("view_area");
 var send = document.getElementById('send');
 
 
 /* クリックイベント処理 */
-canvas.addEventListener('click', function(){
+img.addEventListener('click', function(){
     //ありがとう加算
     thank_you++;
 
@@ -14,28 +14,10 @@ canvas.addEventListener('click', function(){
     {
         thank_you = 20
     }
-    //画面更新
-    draw();
+
+    count_disp.innerHTML = thank_you;
 }, false);
 
-/* 描画関数 */
-function draw(){
-    if (canvas.getContext) {
-        var context = canvas.getContext('2d');
-        //幅と高さ取得
-        var w = canvas.width;
-        var h = canvas.height;
-        //Canvas全体をクリア
-        context.clearRect(0, 0, w, h);
-
-        //ありがとうの描画
-        context.fillStyle = "red";
-        context.font = "25px 'ＭＳ ゴシック'";
-        context.textAlign = "left";
-        context.textBaseline = "top";
-        context.fillText(thank_you, 150, 100); //文字の描画
-    }
-}
 
 
 

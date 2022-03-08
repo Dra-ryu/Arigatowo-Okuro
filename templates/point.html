@@ -2,46 +2,45 @@
 {%- block main %}
 <!DOCTYPE html>
 
-<html="ja">
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../static/css/point.css">
+        <title>point</title>
+        <script src="/static/js/jquery.js"></script>
+    </head>
 
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/css/point.css">
-    <title>point</title>
+    <body>
+        <div class="list">
+            <h1>友達申請・承認</h1>
+                <select name="friend" id="friend_name">
+                    <option hidden>感謝する人を選択</option>
+                    {% for friend in friends_name %}
+                        <option>{{ friend.name }}</option>
+                    {% endfor %}
+                </select>
+        </div>
 
-    <script src="/static/js/jquery.js"></script>
+        <hr>
 
-  </head>
+        <div class="information">
+            <h1>感謝の思いをこめて<br>
+    　          下のボタンを押しましょう！
+            </h1>
+            <p>※最大20ポイントまでありがとうポイントを加算できます</p>
+        </div>
 
-  <body>
-     <div class="container">
-         <div class="list">
-             <p>感謝を伝える人を選んでください</p>
-             <select name="friend" id="friend_name">
-                 <option hidden>感謝する人を選択</option>
-                 {% for friend in friends_name %}
-                     <option>{{ friend.name }}</option>
-                 {% endfor %}
-             </select>
-         </div>
+        <!--ありがとうボタン部分-->
+        <div class="switch">
+            <img id ="view_area" src="../static/img/send_thankyou.png">
+            <p>↓送るありがとうポイント↓</p>
+            <div id="disp_count">0</div>
+        </div>
 
-         <hr>
+        <div id ="send" class="btn">ありがとうを贈る</div>
 
-         <div class="information">
-             <h2>感謝の思いをこめて<br>
-               　下のボタンを押しましょう！
-             </h2>
-             <p>※最大20ポイントまでありがとうポイントを加算できます</p>
-         </div>
+        <script src="../static/js/switch.js"></script>
 
-       <!--ありがとうボタン部分-->
-       <div class="switch">
-         <img src="../static/img/押しボタン.png" width="150" height="131">
-         <canvas id="view_area" width="183" height="131"></canvas>
-       </div>
-    </div>
-    <div id ="send" class="btn">ありがとうを贈る</div>
-    <script src="../static/js/switch.js"></script>
     </body>
 </html>
 {%- endblock %}
