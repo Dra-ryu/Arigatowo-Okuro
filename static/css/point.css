@@ -46,9 +46,10 @@ select {
     text-align: center;
 }
 
-#view_area {
+.switch img {
     width: 20%;
     border-radius: 1vh;
+    margin-bottom: 1vh;
 }
 
 #disp_count {

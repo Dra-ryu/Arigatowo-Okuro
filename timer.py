@@ -27,7 +27,6 @@ def timer():
     return render_template("time.html")
 
 
-# @app.route('/message-send', methods=["GET", "POST"])
 def message_send(username):
 
     # Javascriptからデータを受け取り、辞書から各データを取り出す
@@ -49,12 +48,10 @@ def message_send(username):
 
     messages = TextSendMessage(text=f"{username}さんが{housework_name}を{elapsedTime}分しました！\n\n"
                                     f"ありがとうを送りましょう☺\n\n"
-                                    f"https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/point")  # 実際のURLが分からないと遷移はできない→どうやるん？
+                                    f"https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/point") 
 
     line_bot_api.push_message(partner_user_id, messages=messages)
-    return redirect('/home')  # 別のURLでもメッセージは送られるから、ここは何でも良さそう
-
-
+    return redirect('/home') 
 
 
 if __name__ == "__main__":

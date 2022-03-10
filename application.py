@@ -8,12 +8,8 @@ from datetime import timedelta
 import json
 import requests
 import jwt
-from timer import timer, message_send  # timer.pyを使えるように
-from frend import friend_index, search, add, delete  # frend.pyを使えるように
-
-# beautiful soup用
-import requests
-from bs4 import BeautifulSoup
+from timer import timer, message_send
+from friend import friend_index, search, add, delete
 
 app = Flask(__name__)
 
@@ -30,7 +26,7 @@ Session(app)
 db = SQL("sqlite:///thank.db")
 
 
-#LINEのapi機能を使う
+#LINEのapiを使う
 LINE_CHANNEL_ID = "1656842878"
 LINE_CHANNEL_SECRET = "df3afe8afd799325b833998ef5908fcc"
 REDIRECT_URL = "https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/login"
