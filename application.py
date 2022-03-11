@@ -27,8 +27,9 @@ db = SQL("sqlite:///thank.db")
 
 
 #LINEのapiを使う
-LINE_CHANNEL_ID = "1656842878"
-LINE_CHANNEL_SECRET = "df3afe8afd799325b833998ef5908fcc"
+#セキュリティ上の問題のため、利用時はLINE DEVELOPERSから値を代入する
+LINE_CHANNEL_ID = 
+LINE_CHANNEL_SECRET = 
 REDIRECT_URL = "https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/login"
 
 
