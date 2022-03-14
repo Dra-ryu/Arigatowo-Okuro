@@ -91,7 +91,7 @@ def line_login():
     # 現在login中のユーザーの友人の名前を取得する
     friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", session["id"])
 
-    # 初めてのログインか、ログイン済みかを確かめる(ログインしたことがあれば、データベースに情報は入っているはず)
+    # 初めてのログインか、ログイン済みかを確かめる(ログインしたことがあれば、データベースに情報は入っている)
     check_existance = db.execute("SELECT * FROM users WHERE id = ?", session["id"])
 
     # session中のidの情報がデータベースに格納されていた場合(再ログインの場合)
@@ -103,7 +103,7 @@ def line_login():
         # データベースにLINEの情報を格納する(ポイントは0にする)
         db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0)", line_id, name, picture)
 
-        # ホーム画面にredirect(/home)のルートで値を取得できるので、渡さなくても大丈夫
+        # ホーム画面にredirect
         return redirect("/home")
 
 
