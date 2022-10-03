@@ -1,6 +1,6 @@
 import os
+import sqlite3
 
-from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
@@ -23,14 +23,14 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-db = SQL("sqlite:///thank.db")
+conn = sqlite3.connect("thank.db", check_same_thread=False)
 
 
 #LINEのapiを使う
 #セキュリティ上の問題のため、利用時はLINE DEVELOPERSから値を代入する
-LINE_CHANNEL_ID = 
-LINE_CHANNEL_SECRET = 
-REDIRECT_URL = "https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/login"
+LINE_CHANNEL_ID = "1656842878"
+LINE_CHANNEL_SECRET = "df3afe8afd799325b833998ef5908fcc"
+REDIRECT_URL = "http://127.0.0.1:5000/login"
 
 
 # 初期のログイン画面
@@ -44,6 +44,8 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def line_login():
+
+    db = conn.cursor()
 
     # loginしたら、sessionの継続がスタートする
     session.permanent = True
@@ -83,45 +85,64 @@ def line_login():
     session["id"] = line_id
 
     # 現在login中のユーザーの名前を取得する
-    username = db.execute("SELECT name FROM users WHERE id = ?", session["id"])
+    username = db.execute("SELECT name FROM users WHERE id = ?", (session["id"], ))  # タプルにしている
 
     # 現在login中のユーザーのpointを取得する
-    now_points = db.execute("SELECT point FROM users WHERE id = ?", line_id)
+    now_points = db.execute("SELECT point FROM users WHERE id = ?", (line_id, ))
 
     # 現在login中のユーザーの友人の名前を取得する
-    friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", session["id"])
+    friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"], ))
 
     # 初めてのログインか、ログイン済みかを確かめる(ログインしたことがあれば、データベースに情報は入っている)
-    check_existance = db.execute("SELECT * FROM users WHERE id = ?", session["id"])
+    db.execute("SELECT * FROM users WHERE id = 'gagagaag'")
+    print('check', db.fetchall())
 
-    # session中のidの情報がデータベースに格納されていた場合(再ログインの場合)
-    if check_existance:
-        return redirect("/home")
 
-    # 初ログインの場合
-    else:
-        # データベースにLINEの情報を格納する(ポイントは0にする)
-        db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0)", line_id, name, picture)
+    # # session中のidの情報がデータベースに格納されていた場合(再ログインの場合)
+    # if check_existance:
+    #     print("####")
+    #     return redirect("/home")
 
-        # ホーム画面にredirect
-        return redirect("/home")
+    # # 初ログインの場合
+    # else:
+    # print('hが大青アジョ')
+    # # データベースにLINEの情報を格納する(ポイントは0にする)
+    # db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0);", (line_id, name, picture))
+
+    # conn.commit()
+    # conn.close()
+
+    # ホーム画面にredirect
+    return redirect("/home")
 
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+
+    conn = sqlite3.connect("thank.db", check_same_thread=False)
+    db = conn.cursor()
+
     # sessionが切れていたら、ログイン画面に戻る
     if 'id' not in session:
         return redirect('/')
 
     else:
+        print("$$$$$")
         # 現在login中のユーザーの名前を取得する
-        username = db.execute("SELECT name FROM users WHERE id = ?", session["id"])
+        db.execute("SELECT name FROM users WHERE id = ?", (session["id"], ))
+        username = db.fetchall()
 
         # 現在login中のユーザーのpointを取得する
-        now_points = db.execute("SELECT point FROM users WHERE id = ?", session["id"])
-
+        db.execute("SELECT point FROM users WHERE id = ?", (session["id"], ))
+        now_points = db.fetchall()
+        
         # 現在login中のユーザーの友人の名前を取得する
-        friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", session["id"])
+        db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"], ))
+        friends_name = db.fetchall()
+
+        print(username, now_points, friends_name)
+
+        conn.close()
 
         # home.htmlを表示する
         return render_template("home.html", username=username, point=now_points, friends_name=friends_name)
@@ -241,4 +262,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
