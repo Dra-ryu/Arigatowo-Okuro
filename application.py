@@ -182,13 +182,18 @@ def foreign_message_send():
 # 以下ポイント機能
 @app.route("/point", methods=["GET", "POST"])
 def point():
+
+    conn = sqlite3.connect("thank.db", check_same_thread=False)
+    db = conn.cursor()
+
     # sessionが切れていたら、ログイン画面に戻る
     if 'id' not in session:
         return redirect('/')
 
     else:
         if request.method == 'GET':
-            friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", session["id"])
+            db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"],))
+            friends_name = db.fetchall()[0]
             return render_template("point.html", friends_name=friends_name)
 
         else:
@@ -197,18 +202,21 @@ def point():
             selected_friend_name = data['friend_name']
 
             # 選択されたフレンドのidを取得
-            selected_friend_id = db.execute("SELECT id FROM users WHERE name = ?", selected_friend_name)[0]["id"]
+            db.execute("SELECT id FROM users WHERE name = ?", (selected_friend_name,))
+            selected_friend_id = db.fetchall()[0][0]
 
             # 選択されたフレンドの現在のポイントを取得
-            old_point = db.execute("SELECT point FROM users WHERE id = ?", selected_friend_id)[0]["point"]
-
+            db.execute("SELECT point FROM users WHERE id = ?", (selected_friend_id,))
+            old_point = db.fetchall()[0][0] 
             # ポイント計算
             result_point = add_point + old_point
+            print('ポインt', result_point, old_point, add_point, selected_friend_id)
 
             # 追加後のポイントにUPDATE
-            db.execute("UPDATE users SET point = ? WHERE id = ?", result_point, selected_friend_id) #point更新
+            db.execute("UPDATE users SET point = ? WHERE id = ?", (result_point, selected_friend_id)) #point更新
+            conn.commit()
 
-            return redirect('/point_sent')
+            return redirect('/home')
 
 
 @app.route("/point_sent", methods=["GET", "POST"])
