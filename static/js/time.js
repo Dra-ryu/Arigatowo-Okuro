@@ -128,7 +128,7 @@
 
         // 2秒後にページ遷移する
         setTimeout(function(){
-            window.location.href = 'https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/home';
+            window.location.href = 'http://127.0.0.1:5000/home';
         }, 2*1000);
 
         localStorage.clear();  // localstorage初期化

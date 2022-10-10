@@ -192,7 +192,7 @@
 
     // 100マイクロ秒後に画面遷移→タイマー機能へ
     setTimeout(function(){
-      window.location.href = 'https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/timer';
+      window.location.href = 'http://127.0.0.1:5000//timer';
     }, 100);
 
   });
