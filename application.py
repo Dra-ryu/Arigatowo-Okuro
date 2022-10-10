@@ -165,12 +165,16 @@ def foreign_timer():
 @app.route('/message-send', methods=["GET", "POST"])
 def foreign_message_send():
 
+    conn = sqlite3.connect("thank.db", check_same_thread=False)
+    db = conn.cursor()
+
     # sessionが切れていたら、ログイン画面に戻る
     if 'id' not in session:
         return redirect('/')
 
     else:
-        username = db.execute("SELECT name FROM users WHERE id = ?", session["id"])[0]['name']
+        db.execute("SELECT name FROM users WHERE id = ?", (session["id"],))
+        username = db.fetchall()[0][0]
         user_id = session["id"]
         return message_send(username)  # usernameを引数に
 

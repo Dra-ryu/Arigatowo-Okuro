@@ -30,6 +30,9 @@ def timer():
 
 def message_send(username):
 
+    conn = sqlite3.connect("thank.db", check_same_thread=False)
+    db = conn.cursor()
+
     # Javascriptからデータを受け取り、辞書から各データを取り出す
     data = request.get_json()
     elapsedTime = data['elapsedTime']
@@ -37,19 +40,23 @@ def message_send(username):
     partner_username = data['partner_username']
 
     # ポイント計算
-    old_point = db.execute("SELECT point FROM users WHERE name = ?", username)[0]["point"]
+    db.execute("SELECT point FROM users WHERE name = ?", (username, ))
+    old_point = db.fetchall()[0][0]
+    print("ここまでのポイント", old_point, username)
     new_point = old_point + elapsedTime
-    db.execute("UPDATE users SET point = ? WHERE name = ?", new_point, username)
+    db.execute("UPDATE users SET point = ? WHERE name = ?", (new_point, username))
+    conn.commit()
 
 
     # [0]['name']をつけないと、[{'name': 'Ryu test'}, {'name': 'aaaa'}]という感じで全ての値が出てきちゃう
     # そのため、1つ目のデータのnameに格納されている値を取ってくるとGood!
 
-    partner_user_id = db.execute("SELECT id FROM users WHERE name = ?", partner_username)[0]["id"]  # javascriptはクライアントサイド→sqliteを普通には動かせない→pythonでやることに
+    db.execute("SELECT id FROM users WHERE name = ?", (partner_username,))  # javascriptはクライアントサイド→sqliteを普通には動かせない→pythonでやることに
+    partner_user_id = db.fetchall()[0]
 
     messages = TextSendMessage(text=f"{username}さんが{housework_name}を{elapsedTime}分しました！\n\n"
                                     f"ありがとうを送りましょう☺\n\n"
-                                    f"https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/point") 
+                                    f"http://127.0.0.1:5000/point") 
 
     line_bot_api.push_message(partner_user_id, messages=messages)
     return redirect('/home') 
