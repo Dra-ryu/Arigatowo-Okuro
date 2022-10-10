@@ -17,7 +17,7 @@ app = Flask(__name__)
 # 以下、LINE bot関連の情報
 
 #  チャネルアクセストークンはhttps://developers.line.biz/console/channel/1656501143/messaging-apiから取得
-LINE_CHANNEL_ACCESS_TOKEN = "ZOXAzvYEL3oXZ/8E5tb6ehMfUwLkhj5JygWXJ0IN//HYaOwnUmNxckv5KGbqvzGS6Q5NG5j+CkZsWHPIi3IJa2VotnXy+ewvO7NUQ1nW13qpfIcRHHsd6EObbCP0uh1DHVbSxq7Z/+BIT1wpTWG70wdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_ACCESS_TOKEN = "gJvukELuaCOxRtd0jkucrdgIU15Cvf421lQWjRZv6+08RhE97ZPtbdwQUZ8S/JMBU3X+cTM8afrFoKdpHNGjo7EmXoO8Qs3IYh+87PGU6vM1YK5D7QF+FE5VM6ko73gk7dbMb+yUCVPcb+edMFhq+QdB04t89/1O/w1cDnyilFU="
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
@@ -52,13 +52,14 @@ def message_send(username):
     # そのため、1つ目のデータのnameに格納されている値を取ってくるとGood!
 
     db.execute("SELECT id FROM users WHERE name = ?", (partner_username,))  # javascriptはクライアントサイド→sqliteを普通には動かせない→pythonでやることに
-    partner_user_id = db.fetchall()[0]
+    partner_user_id = db.fetchall()[0][0]
+    print(partner_user_id, elapsedTime, housework_name)
 
     messages = TextSendMessage(text=f"{username}さんが{housework_name}を{elapsedTime}分しました！\n\n"
                                     f"ありがとうを送りましょう☺\n\n"
                                     f"http://127.0.0.1:5000/point") 
 
-    line_bot_api.push_message(partner_user_id, messages=messages)
+    line_bot_api.push_message(partner_user_id, messages)
     return redirect('/home') 
 
 
