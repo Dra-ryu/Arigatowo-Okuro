@@ -138,7 +138,9 @@ def home():
         
         # 現在login中のユーザーの友人の名前を取得する
         db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"], ))
-        friends_name = db.fetchall()
+        friends_name = db.fetchall()[0]
+
+        print("フレンド", friends_name)
 
         print(username, now_points, friends_name)
 
@@ -262,3 +264,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
