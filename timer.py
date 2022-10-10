@@ -2,14 +2,15 @@ import json
 import os
 import requests
 import sys
-from cs50 import SQL  # SQLを使えるようにする
+import sqlite3
+
 from flask import Flask, render_template, request, abort, redirect
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
 from flask_session import Session
 
 
-db = SQL("sqlite:///thank.db")
+db = sqlite3.connect("thank.db", check_same_thread=False)
 
 app = Flask(__name__)
 
