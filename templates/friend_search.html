@@ -22,7 +22,7 @@
             <select name="friend" id="friend_add">
                 <option hidden>選択してください</option>
                 {% for searched_friend in searched_friend_name %}
-                    <option> {{ searched_friend.name }} </option>
+                    <option> {{ searched_friend[0] }} </option>
                 {% endfor %}
             </select>
         </div>
