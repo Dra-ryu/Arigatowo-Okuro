@@ -15,8 +15,8 @@
         <div class="friend_list">
             {% for friend_information in friends_information %}
                 <div class="friend_information">
-                    <p style="display:inline"> {{ friend_information.name }} : </p>
-                    <h2 style="display:inline">{{ friend_information.point }}pt</h2>
+                    <p style="display:inline"> {{ friend_information[1] }} : </p>
+                    <h2 style="display:inline">{{ friend_information[2] }}pt</h2>
                     <p></p>  <!--フレンドを縦並びにする-->
                 </div>
             {% endfor %}

@@ -17,7 +17,7 @@
                 <select name="friend" id="friend_name">
                     <option hidden>感謝する人を選択</option>
                     {% for friend in friends_name %}
-                        <option>{{ friend.name }}</option>
+                        <option>{{ friend[0] }}</option>
                     {% endfor %}
                 </select>
         </div>

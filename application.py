@@ -10,6 +10,8 @@ import requests
 import jwt
 from timer import timer, message_send
 from friend import friend_index, search, add, delete
+from linebot import LineBotApi
+from linebot.models import TextSendMessage
 
 app = Flask(__name__)
 
@@ -32,6 +34,10 @@ LINE_CHANNEL_ID = "1656842878"
 LINE_CHANNEL_SECRET = "df3afe8afd799325b833998ef5908fcc"
 REDIRECT_URL = "http://127.0.0.1:5000/login"
 
+#  チャネルアクセストークンはhttps://developers.line.biz/console/channel/1656501143/messaging-apiから取得
+LINE_CHANNEL_ACCESS_TOKEN = "gJvukELuaCOxRtd0jkucrdgIU15Cvf421lQWjRZv6+08RhE97ZPtbdwQUZ8S/JMBU3X+cTM8afrFoKdpHNGjo7EmXoO8Qs3IYh+87PGU6vM1YK5D7QF+FE5VM6ko73gk7dbMb+yUCVPcb+edMFhq+QdB04t89/1O/w1cDnyilFU="
+
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
 # 初期のログイン画面
 @app.route("/", methods=["GET"])
@@ -138,7 +144,12 @@ def home():
         
         # 現在login中のユーザーの友人の名前を取得する
         db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"], ))
-        friends_name = db.fetchall()[0]
+        
+        # フレンドが登録されていない場合、データは存在しない
+        try:
+            friends_name = db.fetchall()
+        except IndexError:
+            friends_name = db.fetchall()
 
         print("フレンド", friends_name)
 
@@ -193,7 +204,13 @@ def point():
     else:
         if request.method == 'GET':
             db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"],))
-            friends_name = db.fetchall()[0]
+            
+            #  フレンドが登録されていない場合、データは存在しない
+            try:
+                friends_name = db.fetchall()
+            except IndexError:
+                friends_name = db.fetchall()
+
             return render_template("point.html", friends_name=friends_name)
 
         else:
@@ -217,6 +234,28 @@ def point():
             conn.commit()
 
             return redirect('/home')
+
+@app.route("/point-message-send", methods=["GET", "POST"])
+def point_message_send():
+    conn = sqlite3.connect("thank.db", check_same_thread=False)
+    db = conn.cursor()
+
+    # Javascriptからデータを受け取り、辞書から各データを取り出す
+    data = request.get_json()
+    thankyou_point = data['thankyou_point']
+    friend_name = data['friend_name']
+
+    db.execute("SELECT name FROM users WHERE id = ?", (session["id"],))
+    username = db.fetchall()[0][0]
+
+    db.execute("SELECT id FROM users WHERE name = ?", (friend_name,))  # javascriptはクライアントサイド→sqliteを普通には動かせない→pythonでやることに
+    partner_user_id = db.fetchall()[0][0]
+
+    messages = TextSendMessage(text=f"{username}さんから\n\n"
+                                    f"{thankyou_point}ありがとうポイントが届きました！\n\n")
+    
+    line_bot_api.push_message(partner_user_id, messages)
+    return redirect('/home')
 
 
 @app.route("/point_sent", methods=["GET", "POST"])

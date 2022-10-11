@@ -77,10 +77,19 @@ def add():
 
 #フレンド削除用↓
 def delete():
+
+    db = conn.cursor()
+
     if request.method == 'GET':
 
         # ログイン中のユーザーのフレンド情報を取得
-        friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", session["id"])
+        db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"],))
+        
+        # フレンドが登録されていない場合、データは存在しない
+        try:
+            friends_name = db.fetchall()
+        except IndexError:
+            friends_name = db.fetchall()
 
         # フレンド削除画面に移動
         return render_template("friend_delete.html", friends_name = friends_name)
@@ -90,10 +99,14 @@ def delete():
         deleted_friend_name = request.get_json()
 
         # 名前からSELECTして削除する人のidを取得する
-        deleted_id = db.execute("SELECT id FROM users WHERE name = ?", deleted_friend_name)[0]["id"]
+        db.execute("SELECT id FROM users WHERE name = ?", (deleted_friend_name,))
+        deleted_id = db.fetchall()[0][0]
+
+        print("削除", deleted_id)
 
         # friendsテーブルから友人情報を削除する(user_idとpartner_idが一致するもの)
-        db.execute("DELETE FROM friends WHERE user_id = ? AND partner_id = ?", session["id"], deleted_id)
+        db.execute("DELETE FROM friends WHERE user_id = ? AND partner_id = ?", (session["id"], deleted_id))
+        conn.commit()
 
         # フレンドリストの画面に戻る
         return redirect("/friend")
