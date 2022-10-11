@@ -49,9 +49,24 @@ send.addEventListener('click', function(){
         icon: 'success',
     })
 
+    // 渡すデータをひとまとめに(pythonだと辞書型になる)
+    var forLineMessage = {
+        'thankyou_point': thankyou_point,
+        'friend_name': friend_name
+    }
+
+    // python(timer.py)にデータを送る
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "/point-message-send",
+        data: JSON.stringify(forLineMessage),  // JSON文字列への変換をして、辞書をpythonに送る
+        dataType: "json"
+    });
+
     // 2秒後にページ遷移する
     setTimeout(function(){
-        window.location.href = 'https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/home';
+        window.location.href = 'http://127.0.0.1:5000/home';
     }, 2*1000);
 
 });

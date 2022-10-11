@@ -24,7 +24,7 @@
     //(1マイクロ秒だと、データベースに入れるのが間に合わず、リロードしないとフレンドリストに反映されない)
     
     setTimeout(function(){
-      window.location.href = 'https://ide-7ebceea5200d4ec6b5f68152dd2b843c-8080.cs50.ws/friend';
+      window.location.href = 'http://127.0.0.1:5000/friend';
     }, 100);
 
     });
