@@ -192,7 +192,7 @@
 
     // 100マイクロ秒後に画面遷移→タイマー機能へ
     setTimeout(function(){
-      window.location.href = 'http://127.0.0.1:5000//timer';
+      window.location.href = 'https://presentthanks.pythonanywhere.com//timer';
     }, 100);
 
   });

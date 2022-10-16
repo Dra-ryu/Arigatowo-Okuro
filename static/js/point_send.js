@@ -66,7 +66,7 @@ send.addEventListener('click', function(){
 
     // 2秒後にページ遷移する
     setTimeout(function(){
-        window.location.href = 'http://127.0.0.1:5000/home';
+        window.location.href = 'https://presentthanks.pythonanywhere.com/home';
     }, 2*1000);
 
 });

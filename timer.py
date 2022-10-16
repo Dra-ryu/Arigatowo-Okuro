@@ -57,7 +57,7 @@ def message_send(username):
 
     messages = TextSendMessage(text=f"{username}さんが{housework_name}を{elapsedTime}分しました！\n\n"
                                     f"ありがとうを送りましょう☺\n\n"
-                                    f"http://127.0.0.1:5000/point") 
+                                    f"https://presentthanks.pythonanywhere.com/point") 
 
     line_bot_api.push_message(partner_user_id, messages)
     return redirect('/home') 

@@ -24,7 +24,7 @@
     //(1マイクロ秒だと、データベースに入れるのが間に合わず、リロードしないとフレンドリストに反映されない)
     
     setTimeout(function(){
-      window.location.href = 'http://127.0.0.1:5000/friend';
+      window.location.href = 'https://presentthanks.pythonanywhere.com/friend';
     }, 100);
 
     });
