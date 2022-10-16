@@ -90,17 +90,40 @@ def line_login():
     # session用のidとしてline_idを設定(持続は1日)
     session["id"] = line_id
 
+    # 初めてのログインか、ログイン済みかを確かめる(ログインしたことがあれば、データベースに情報は入っている)
+    try:
+        db.execute("SELECT * FROM users WHERE id = ?", (line_id, ))
+    except sqlite3.OperationalError:
+        db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0);", (line_id, name, picture))
+        conn.commit()
+        # ホーム画面にredirect
+        return redirect("/home")
+
+    is_user_existed = db.fetchall()
+
+    if is_user_existed == []:
+        print('hが大青アジョ')
+        # データベースにLINEの情報を格納する(ポイントは0にする)
+        db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0);", (line_id, name, picture))
+        conn.commit()
+        # ホーム画面にredirect
+        return redirect("/home")
+    
+    else:
+        print("####")
+        return redirect("/home")
+
+
     # 現在login中のユーザーの名前を取得する
-    username = db.execute("SELECT name FROM users WHERE id = ?", (session["id"], ))  # タプルにしている
+    username = db.execute("SELECT name FROM users WHERE id = ?", (line_id, ))  # タプルにしている
 
     # 現在login中のユーザーのpointを取得する
     now_points = db.execute("SELECT point FROM users WHERE id = ?", (line_id, ))
 
     # 現在login中のユーザーの友人の名前を取得する
-    friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"], ))
-
-    # 初めてのログインか、ログイン済みかを確かめる(ログインしたことがあれば、データベースに情報は入っている)
-    db.execute("SELECT * FROM users WHERE id = 'gagagaag'")
+    friends_name = db.execute("SELECT name FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (line_id, ))
+    
+    check_existance = db.fetchall
     print('check', db.fetchall())
 
 
@@ -108,18 +131,6 @@ def line_login():
     # if check_existance:
     #     print("####")
     #     return redirect("/home")
-
-    # # 初ログインの場合
-    # else:
-    # print('hが大青アジョ')
-    # # データベースにLINEの情報を格納する(ポイントは0にする)
-    # db.execute("INSERT INTO users (id, name, image_url, point) VALUES (?, ?, ?, 0);", (line_id, name, picture))
-
-    # conn.commit()
-    # conn.close()
-
-    # ホーム画面にredirect
-    return redirect("/home")
 
 
 @app.route("/home", methods=["GET", "POST"])
