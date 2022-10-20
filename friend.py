@@ -1,13 +1,7 @@
-from flask import Flask
-from flask import render_template, request, redirect, session
-# from flask_sqlalchemy import SQLAlchemy #SQLAlchemyを利用する
-from datetime import datetime #時間取得のインポート
-import pytz #時間の時差を計算
 import sqlite3
+from flask import Flask, render_template, request, redirect, session
+from datetime import datetime
 from flask_session import Session
-
-import datetime
-
 
 
 app = Flask(__name__)
@@ -26,7 +20,6 @@ def friend_index():
         db.execute("SELECT * FROM users WHERE id IN (SELECT partner_id FROM friends WHERE user_id = ?)", (session["id"],))
         friends_information = db.fetchall()
 
-        # フレンドリストを表示
         return render_template('friend_list.html', friends_information = friends_information)
 
 
@@ -43,13 +36,11 @@ def search():
         # フォームに名前を入力してもらい、一致する名前をusersテーブルから取得
         db.execute("SELECT name FROM users WHERE name = ?", (request.form.get("search"),))
         searched_friend_name = db.fetchall()
-        print("aaa", searched_friend_name, request.form.get("search"))
         
-        return render_template('friend_search.html', searched_friend_name = searched_friend_name) # 検索結果を表示する
+        return render_template('friend_search.html', searched_friend_name = searched_friend_name)
 
 
-
-# 友人追加を押した時の処理(friend.js経由でルーティング)
+# 友人追加の処理(friend.js経由でルーティング)
 def add():
 
     db = conn.cursor()
@@ -57,13 +48,10 @@ def add():
     # 友人検索で選択された友人の名前をfirend_search.jsから受け取る
     added_friend_name = request.get_json()
 
-    # 最初に、名前からSELECTして追加する人のidを取得する
+    # 最初に、名前からSELECTして追加するフレンドのidを取得する
     db.execute("SELECT id FROM users WHERE name = ?", (added_friend_name,))
 
     added_id = db.fetchall()[0][0]
-
-    print("追加", added_id)
-    print(session["id"])
 
     # friendsテーブルに、自分のuser_id, 追加する友人のuser_id, 時間をINSERTする
     db.execute("INSERT INTO friends (user_id, partner_id) VALUES (?, ?);",
@@ -71,11 +59,10 @@ def add():
 
     conn.commit()
 
-    # フレンドリストの画面に戻る
     return redirect("/friend")
 
 
-#フレンド削除用↓
+#フレンド削除
 def delete():
 
     db = conn.cursor()
@@ -89,9 +76,8 @@ def delete():
         try:
             friends_name = db.fetchall()
         except IndexError:
-            friends_name = db.fetchall()
+            pass
 
-        # フレンド削除画面に移動
         return render_template("friend_delete.html", friends_name = friends_name)
 
     else:
@@ -102,12 +88,8 @@ def delete():
         db.execute("SELECT id FROM users WHERE name = ?", (deleted_friend_name,))
         deleted_id = db.fetchall()[0][0]
 
-        print("削除", deleted_id)
-
         # friendsテーブルから友人情報を削除する(user_idとpartner_idが一致するもの)
         db.execute("DELETE FROM friends WHERE user_id = ? AND partner_id = ?", (session["id"], deleted_id))
         conn.commit()
 
-        # フレンドリストの画面に戻る
         return redirect("/friend")
-
