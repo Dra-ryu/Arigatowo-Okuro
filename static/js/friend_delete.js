@@ -19,10 +19,6 @@
       dataType: "json"
     });
 
-    
-    // 100マイクロ秒後に画面遷移→タイマー機能へ
-    //(1マイクロ秒だと、データベースに入れるのが間に合わず、リロードしないとフレンドリストに反映されない)
-    
     setTimeout(function(){
       window.location.href = 'https://presentthanks.pythonanywhere.com/friend';
     }, 100);

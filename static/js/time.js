@@ -1,5 +1,3 @@
-//参考URL: https://poisoncreation.wordpress.com/2020/09/11/stopwatch/
-
 'use strict';
 
 {
@@ -23,28 +21,28 @@
 
     // タイマーが動作中だったら
     if (timerOn === 'on') {
-        start.classList.add('inactive');   // 非活性
+        start.classList.add('inactive');
         finish.classList.remove('inactive');
         callPrintTime();
     }
     // 動作していない場合はstateに0を入れてボタンを初期状態に
     else {
         localStorage.setItem('timer_on', 'off');
-        start.classList.remove('inactive'); // 活性
+        start.classList.remove('inactive');
         finish.classList.add('inactive');
     }
 
 
     // 状態:初期
     function setButtonStateInitial() {
-        start.classList.remove('inactive'); // 活性
+        start.classList.remove('inactive');
         finish.classList.add('inactive');
     }
 
     // 状態:タイマー動作中
     function setButtonStateRunning() {
-        start.classList.add('inactive');   // 非活性
-        finish.classList.remove('inactive');  //活性
+        start.classList.add('inactive');
+        finish.classList.remove('inactive');
     }
 
     // タイマー部分の処理
@@ -122,7 +120,7 @@
             type: "POST",
             contentType: "application/json; charset=utf-8",
             url: "/message-send",
-            data: JSON.stringify(forLineMessage),  // JSON文字列への変換をして、辞書をpythonに送る
+            data: JSON.stringify(forLineMessage),  // JSON文字列への変換をして、pythonに送る
             dataType: "json"
         });
 
