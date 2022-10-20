@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # 以下、LINE bot関連の情報
 #  チャネルアクセストークンはhttps://developers.line.biz/console/channel/1656501143/messaging-apiから取得
-LINE_CHANNEL_ACCESS_TOKEN = "gJvukELuaCOxRtd0jkucrdgIU15Cvf421lQWjRZv6+08RhE97ZPtbdwQUZ8S/JMBU3X+cTM8afrFoKdpHNGjo7EmXoO8Qs3IYh+87PGU6vM1YK5D7QF+FE5VM6ko73gk7dbMb+yUCVPcb+edMFhq+QdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_ACCESS_TOKEN = "チャネルアクセストークン"
 
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
