@@ -4,7 +4,6 @@ import json
 import requests
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
-from tempfile import mkdtemp
 from datetime import timedelta
 from timer import timer, message_send
 from friend import friend_index, search, add, delete
@@ -14,12 +13,10 @@ from linebot.models import TextSendMessage
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "silvia"
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+#  sessionに関する設定
+app.secret_key = "silvia"  #  sessionに格納する情報の暗号化
+app.templated_auto_reload = True  #  render_templateで返すHTMLが動的に変化できるように
+app.permanent_session_lifetime = timedelta(days=1)
 
 conn = sqlite3.connect("thank.db", check_same_thread=False)
 
@@ -48,10 +45,6 @@ def index():
 def line_login():
 
     db = conn.cursor()
-
-    # loginしたら、sessionの継続がスタート
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(days=1)
 
     # LINEの認可コードを取得する
     request_code = request.args["code"]
@@ -82,7 +75,9 @@ def line_login():
     picture = decoded_id_token["picture"]
     line_id = decoded_id_token["sub"]
 
-    # session用のidとしてline_idを設定(持続は1日)
+
+    # loginしたら、sessionの継続がスタート
+    session.permanent = True
     session["id"] = line_id
 
     # 登録されたユーザーかを確かめる(ログインしたことがあれば、データベースに情報は入っている)
@@ -277,4 +272,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)  #  公開のときFalseにする
