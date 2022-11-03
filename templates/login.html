@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>ログイン</title>
-    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/login.css">
 </head>
 
 <body>
     <div class="login">
         <h2>▼新規登録・ログインはこちらから▼</h2>
         <p></p>
+        <!-- LINEログイン時のユーザーに認証と許可を要求する -->
         <a href="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id={{ channel_id }}&redirect_uri={{ redirect_url }}&state={{ random_state }}&scope=openid%20profile">
         <img src="{{ url_for('static', filename='Line_Login_Button_Image/images/DeskTop/2x/32dp/btn_login_base.png') }}"></a>
     </div>
