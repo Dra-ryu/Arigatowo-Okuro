@@ -17,12 +17,12 @@ app.templated_auto_reload = True  #  render_templateで返すHTMLが動的に変
 app.permanent_session_lifetime = timedelta(days=1)
 
 #LINEのapiを使う(セキュリティ上の問題のため、利用時はLINE DEVELOPERSから値を代入する)
-LINE_CHANNEL_ID = "1656842878"
-LINE_CHANNEL_SECRET = "df3afe8afd799325b833998ef5908fcc"
+LINE_CHANNEL_ID = "チャネルID"
+LINE_CHANNEL_SECRET = "チャネルシークレット"
 REDIRECT_URL = "https://presentthanks.pythonanywhere.com/login"
 
 #  チャネルアクセストークンはhttps://developers.line.biz/console/channel/1656501143/messaging-apiから取得
-LINE_CHANNEL_ACCESS_TOKEN = "gJvukELuaCOxRtd0jkucrdgIU15Cvf421lQWjRZv6+08RhE97ZPtbdwQUZ8S/JMBU3X+cTM8afrFoKdpHNGjo7EmXoO8Qs3IYh+87PGU6vM1YK5D7QF+FE5VM6ko73gk7dbMb+yUCVPcb+edMFhq+QdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_ACCESS_TOKEN = "チャネルアクセストークン"
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
 
