@@ -1,27 +1,25 @@
 'use strict';
-
 {
     // 定数を定義して、HTMLから要素を取得
     const del = document.getElementById('del');
 
     // 削除のボタンが押された時の処理
     del.addEventListener('click', () => {
+      // プルダウンの値を取得する
+      const deleted_friend_name = document.getElementById('friend_delete').value;
 
-    // セレクトボックスの値を取得する
-    const deleted_friend_name = document.getElementById('friend_delete').value;
+      // /deleteのルートにデータを渡す
+      $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "/delete",
+        data: JSON.stringify(deleted_friend_name),
+        dataType: "json"
+      });
 
-    // /deleteのルートに値を送る
-    $.ajax({
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      url: "/delete",
-      data: JSON.stringify(deleted_friend_name),// JSON文字列への変換をして、辞書をpythonに送る
-      dataType: "json"
-    });
-
-    setTimeout(function(){
-      window.location.href = 'https://presentthanks.pythonanywhere.com/friend';
-    }, 100);
+      setTimeout(function(){
+        window.location.href = 'https://presentthanks.pythonanywhere.com/friend';
+      }, 100);
 
     });
 
