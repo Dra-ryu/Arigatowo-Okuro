@@ -1,7 +1,5 @@
 'use strict';
-
 {
-    const timer = document.getElementById('timer');
     const start = document.getElementById('start');
     const finish = document.getElementById('finish');
 
@@ -11,7 +9,7 @@
 
     let timerOn = localStorage.getItem('timer_on'); //タイマーの動作状況
 
-    // home.jsにおいて値を入力したローカルストレージから値を取りだし、HTML上に表示
+    // home.jsにおいて値を入力したローカルストレージから値を取りだし、タイマー画面に表示
     const housework_name = localStorage.getItem('housework');
     const partner_username = localStorage.getItem('friend_name');
 
@@ -32,13 +30,6 @@
         finish.classList.add('inactive');
     }
 
-
-    // 状態:初期
-    function setButtonStateInitial() {
-        start.classList.remove('inactive');
-        finish.classList.add('inactive');
-    }
-
     // 状態:タイマー動作中
     function setButtonStateRunning() {
         start.classList.add('inactive');
@@ -52,7 +43,7 @@
     }
 
     function printTime() {
-        // この処理によって、HTMLのid=timerの部分のtextが右辺のものになる
+        // この処理によって、HTMLのid=timerの部分が右辺のものになる
         document.querySelector('#timer').textContent = getTimeString();
     }
 
@@ -100,7 +91,7 @@
         elapsedTime = Math.floor(elapsedTime / 60000);  // ミリ秒をminに変換して、小数点以下切り捨て
 
         // 表示するメッセージ
-        var message = housework_name + 'を' + elapsedTime + '分しました！\n' + partner_username + 'さんに通知を送りました！';
+        const message = housework_name + 'を' + elapsedTime + '分しました！\n' + partner_username + 'さんに通知を送りました！';
 
         // sweatalert
         swal({
@@ -108,8 +99,8 @@
             icon: 'success',
         })
 
-        // 渡すデータをひとまとめに(pythonだと辞書型になる)
-        var forLineMessage = {
+        // 渡すデータをひとまとめに
+        const forLineMessage = {
             'elapsedTime': elapsedTime,
             'housework_name': housework_name,
             'partner_username': partner_username
