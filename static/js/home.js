@@ -187,7 +187,7 @@
 
       // タイマー機能へ画面遷移
       setTimeout(function(){
-        window.location.href = 'https:/presentthanks.pythonanywhere.com/timer';
+        window.location.href = 'https://presentthanks.pythonanywhere.com/timer';
       }, 100);
 
   });
