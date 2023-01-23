@@ -5,7 +5,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 
-# フレンドリスト表示
+# フレンドリスト表示　コミットテスト
 def friend_index():
     if request.method == 'GET':
         conn = sqlite3.connect("thank.db")
